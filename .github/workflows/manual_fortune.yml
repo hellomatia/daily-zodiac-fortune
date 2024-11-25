@@ -62,10 +62,10 @@ jobs:
                     'Fortune is smiling upon you in matters of wealth.'
                 ]),
                 'health': random.choice([
-                    'You'll feel energized and full of vitality today.',
+                    'You\'ll feel energized and full of vitality today.',
                     'Today marks the beginning of a positive change for your health.',
                     'Make sure to get enough rest and recharge.',
-                    'It's a good day to focus on physical activities.',
+                    'It\'s a good day to focus on physical activities.',
                     'Take some time to enjoy fresh air and nature.'
                 ]),
                 'color': random.choice(['Red', 'Blue', 'Yellow', 'Purple', 'Green', 'Orange', 'Pink', 'Sky Blue', 'White', 'Black']),
