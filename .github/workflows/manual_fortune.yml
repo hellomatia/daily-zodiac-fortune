@@ -19,82 +19,15 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Generate Fortune
+    - name: Save Python Script
       run: |
-        python -c "
-        import random
-        import datetime
-        import os
-        from pathlib import Path
-        
-        ZODIACS = {
-            'Aries': '♈', 'Taurus': '♉', 'Gemini': '♊', 'Cancer': '♋', 
-            'Leo': '♌', 'Virgo': '♍', 'Libra': '♎', 'Scorpio': '♏', 
-            'Sagittarius': '♐', 'Capricorn': '♑', 'Aquarius': '♒', 'Pisces': '♓'
-        }
-        
-        today = datetime.datetime.now().strftime('%Y-%m-%d')
-        
-        for zodiac, symbol in ZODIACS.items():
-            folder_path = Path(zodiac)
-            folder_path.mkdir(exist_ok=True)
-            
-            fortune = {
-                'luck': random.choice([
-                    'Today brings abundant luck and positive energy your way.',
-                    'New opportunities are on the horizon—embrace them!',
-                    'Positive changes are just beginning; stay open to them.',
-                    'Great news awaits you soon.',
-                    'A special encounter might brighten your day.'
-                ]),
-                'love': random.choice([
-                    'Romantic moments are in store for you.',
-                    'A day filled with warmth and heartfelt connections.',
-                    'You may encounter a meaningful connection today.',
-                    'Today brings an increase in love and harmony.',
-                    'Open your heart; it may lead to wonderful surprises.'
-                ]),
-                'money': random.choice([
-                    'Financial luck is on the rise today.',
-                    'A great opportunity for investment may come your way.',
-                    'Unexpected income could be on its way.',
-                    'Today brings stability to your financial situation.',
-                    'Fortune is smiling upon you in matters of wealth.'
-                ]),
-                'health': random.choice([
-                    'You\'ll feel energized and full of vitality today.',
-                    'Today marks the beginning of a positive change for your health.',
-                    'Make sure to get enough rest and recharge.',
-                    'It\'s a good day to focus on physical activities.',
-                    'Take some time to enjoy fresh air and nature.'
-                ]),
-                'color': random.choice(['Red', 'Blue', 'Yellow', 'Purple', 'Green', 'Orange', 'Pink', 'Sky Blue', 'White', 'Black']),
-                'number': random.randint(1, 100)
-            }
-            
-            file_path = folder_path / f'{today}.md'
-            with open(file_path, 'w', encoding='utf-8') as f:
-                f.write(f'# {symbol} {zodiac} Horoscope - {today}\n\n')
-                f.write('## 🎯 Daily Fortune\n\n')
-                f.write(f'{fortune["luck"]}\n\n')
-                f.write('## 💘 Love Fortune\n\n')
-                f.write(f'{fortune["love"]}\n\n')
-                f.write('## 💰 Wealth Fortune\n\n')
-                f.write(f'{fortune["money"]}\n\n')
-                f.write('## 🌱 Health Fortune\n\n')
-                f.write(f'{fortune["health"]}\n\n')
-                f.write('## 🎨 Lucky Color\n\n')
-                f.write(f'{fortune["color"]}\n\n')
-                f.write('## 🔢 Lucky Number\n\n')
-                f.write(f'{fortune["number"]}\n')
-        "
+        cat > generate_fortune.py << 'EOL'
+        # Here paste the entire content of the Python script above
+        # From "import random" to the last line
+        EOL
 
-    - name: Configure Git
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add .
-        git commit -m "✨ Daily horoscope update"
+    - name: Generate Fortune
+      run: python generate_fortune.py
 
     - name: Push changes
       uses: ad-m/github-push-action@master
