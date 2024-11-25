@@ -11,6 +11,9 @@ jobs:
     permissions:
       contents: write
 
+    env:
+      TZ: 'Asia/Seoul'  # Set timezone to Korea Standard Time (KST)
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
