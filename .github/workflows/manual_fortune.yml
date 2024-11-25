@@ -1,0 +1,36 @@
+name: Manual Fortune Generation
+
+on:
+  workflow_dispatch:  # This enables manual triggering
+
+jobs:
+  create-fortune:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+
+    - name: Setup Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+
+    - name: Save Python Script
+      run: |
+        cat > generate_fortune.py << 'EOL'
+        # Here paste the entire content of the Python script above
+        # From "import random" to the last line
+        EOL
+
+    - name: Generate Fortune
+      run: python generate_fortune.py
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
