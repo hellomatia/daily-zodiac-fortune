@@ -45,10 +45,10 @@ MONEY_PHRASES = [
 ]
 
 HEALTH_PHRASES = [
-    'You'll feel energized and full of vitality today.',
+    'You\'ll feel energized and full of vitality today.',
     'Today marks the beginning of a positive change for your health.',
     'Make sure to get enough rest and recharge.',
-    'It's a good day to focus on physical activities.',
+    'It\'s a good day to focus on physical activities.',
     'Take some time to enjoy fresh air and nature.'
 ]
 
