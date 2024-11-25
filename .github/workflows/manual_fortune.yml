@@ -10,7 +10,8 @@ jobs:
       contents: write
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout Repository
+      uses: actions/checkout@v3
       with:
         fetch-depth: 1
 
@@ -19,23 +20,23 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Save Python Script
+    - name: Install Requirements (if needed)
       run: |
-        cat > generate_fortune.py << 'EOL'
-        # Here paste the entire content of the Python script above
-        # From "import random" to the last line
-        EOL
+        # Optional step if there are specific Python dependencies
+        pip install -r requirements.txt || echo "No dependencies to install"
 
-    - name: Generate Fortune
+    - name: Run Fortune Generator Script
       run: python generate_fortune.py
 
-    - name: Push changes
+    - name: Configure Git for Push
       run: |
         git config --global user.email "shuaigejp80@gmail.com"
         git config --global user.name "hellomatia"
+
+    - name: Commit and Push Changes
+      run: |
         git add .
-        git commit -m "✨ ${today} horoscope update" || echo "No changes to commit"
-        git push origin main
+        git commit -m "✨ update horoscope for $(date +'%Y-%m-%d')"
+        git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
